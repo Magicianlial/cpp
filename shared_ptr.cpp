@@ -1,6 +1,6 @@
-#include<iostream>
-#include<mutex>
-#include<thread>
+#include <iostream>
+#include <mutex>
+#include <thread>
 using namespace std;
 
 template<class T>
@@ -72,4 +72,7 @@ private:
 	mutex* _pMutex;
 };
 
-
+int main() {
+    
+    return 0;
+}
