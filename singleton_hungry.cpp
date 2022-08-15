@@ -7,7 +7,6 @@ private:
 
 public:
     static Singleton* getInstance() {
-        printf("instance got\n");
         return instance;
     }
     class CG {
