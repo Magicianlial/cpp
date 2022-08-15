@@ -1,31 +1,35 @@
 #include <iostream>
+#include <pthread.h>
 
 class Singleton {
 private:
     static Singleton *instance;
     Singleton(){};
-    
+
     class CG {
-        ~CG() {
+    public:
+        ~CG(){
             if(Singleton::instance != nullptr) {
                 delete Singleton::instance;
                 Singleton::instance = nullptr;
             }
         }
     };
-    static CG cleanCarbarge;
+    static CG cleanCarbage;
 
 public:
-    static Singleton* getInstance() {
-        return instance;
-    }
-    
+    static Singleton* getIntance(){};
 };
 
-Singleton* Singleton::instance = new Singleton();
+Singleton* Singleton::instance = nullptr;
+Singleton* Singleton::getIntance() {
+    if(Singleton::instance == nullptr) {
+        Singleton::instance = new Singleton();
+    }
+    return Singleton::instance;
+}
 
 int main() {
-    Singleton *p = Singleton::getInstance();
-    if(p != nullptr) printf("succeed\n");
+
     return 0;
 }
