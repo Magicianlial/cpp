@@ -33,5 +33,7 @@ mystring::mystring(const char *str){
 }
 
 mystring::mystring(const mystring &rhs) {
-    
+    int nLen = strlen(rhs.m_pData);
+    m_pData = new char[nLen + 1];
+    strcpy(m_pData, rhs.m_pData);
 }
