@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+using namespace std;
 
 class mystring {
 public:
@@ -15,6 +16,8 @@ public:
 
 private:
     char *m_pData;
+    friend ostream& operator<<(ostream& out, mystring &s);
+    friend istream& operator>>(istream& in, mystring &s);
 };
 
 mystring::mystring():m_pData(new char[1]) {
@@ -70,4 +73,16 @@ int mystring::size() const {
 
 char* mystring::c_str() const{
     return m_pData;
+}
+
+ostream& operator<<(ostream &out, mystring &s) {
+    out << s.m_pData;
+    return out;
+}
+
+istream& operator>>(istream &in, mystring &s) {
+    char data[1024];
+    in.getline(data, 1024);
+    s = data;
+    return in;
 }
