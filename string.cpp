@@ -21,6 +21,7 @@ mystring::mystring():m_pData(new char[1]) {
     *m_pData = '\0';
 }
 
+
 mystring::mystring(const char *str){
     if(!str) {
         m_pData = new char[1];
@@ -36,4 +37,37 @@ mystring::mystring(const mystring &rhs) {
     int nLen = strlen(rhs.m_pData);
     m_pData = new char[nLen + 1];
     strcpy(m_pData, rhs.m_pData);
+}
+
+mystring& mystring::operator=(const mystring &rhs) {
+    if(this != &rhs) {
+        if(m_pData) {
+            delete[] m_pData;
+        }
+        int nLen = strlen(rhs.m_pData);
+        m_pData = new char[nLen + 1];
+        strcpy(m_pData, rhs.m_pData);
+    }
+    return *this;
+}
+
+mystring::~mystring() {
+    if(m_pData) {
+        delete[] m_pData;
+        m_pData = nullptr;
+    }
+}
+
+char mystring::operator[](int i) const {
+    int nLen = strlen(m_pData);
+    if(i >= nLen) return '\0';
+    else return m_pData[i];
+}
+
+int mystring::size() const {
+    return strlen(m_pData);
+}
+
+char* mystring::c_str() const{
+    return m_pData;
 }
